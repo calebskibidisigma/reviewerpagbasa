@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Glassmorphism Reviewer - Module 1 & 2</title>
+    <!-- Google Fonts for a clean, modern aesthetic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Font Awesome for sleek, thin-line icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* 1. CORE VARIABLES AND RESET */
+        :root {
+            --bg-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #9333ea 100%);
+            --glass-bg: rgba(255, 255, 255, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-blur: blur(12px);
+            --accent-color: #deff9a;
+            --text-primary: #ffffff;
+            --text-secondary: #e2e8f0;
+            --card-radius: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0f172a;
+            display: grid;
+            gap: 40px;
+            grid-template-columns: 1fr;
+            margin: 0;
+            min-height: 100vh;
+            place-items: center;
+            padding: 40px 0;
+        }
+
+        /* 2. SLIDE CONTAINER BASE */
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background: var(--bg-gradient);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-primary);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 3. BACKGROUND DESIGN ELEMENTS (Blobs) */
+        .slide-container::before,
+        .slide-container::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+            filter: blur(80px);
+            opacity: 0.5;
+        }
+
+        .slide-container::before {
+            width: 500px;
+            height: 500px;
+            background: #6366f1;
+            top: -100px;
+            left: -100px;
+        }
+
+        .slide-container::after {
+            width: 400px;
+            height: 400px;
+            background: #d946ef;
+            bottom: -50px;
+            right: -50px;
+        }
+
+        .content-area, .slide-title, .title-layout {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 4. TYPOGRAPHY */
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-primary);
+        }
+
+        .slide-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: left;
+            width: 100%;
+            letter-spacing: -1px;
+        }
+
+        p, li {
+            font-size: 20px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        /* 5. GLASS PANELS */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--card-radius);
+            padding: 40px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+        }
+
+        /* 6. LAYOUT COMPONENTS */
+        .content-area {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .tag-label {
+            display: inline-block;
+            background: var(--accent-color);
+            color: #1e293b;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            width: 100%;
+        }
+
+        .tiled-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            width: 100%;
+        }
+
+        .tile {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .tile .icon {
+            font-size: 40px;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .tile h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        /* 7. TABLES */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 15px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        th, td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--accent-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+
+        /* 8. LIST STYLING */
+        .styled-list {
+            list-style: none;
+        }
+
+        .styled-list li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 15px;
+        }
+
+        .styled-list li::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        /* 9. SPECIAL LAYOUTS */
+        .title-layout {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .title-layout h1 {
+            font-size: 84px;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .title-layout .subtitle {
+            font-size: 28px;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+
+        .bleed-image-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 0;
+        }
+
+        .bleed-text {
+            padding: 80px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .bleed-img {
+            width: 100%;
+            height: 720px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+<!-- SLIDE 1: Title Slide (Module 1) -->
+<div class="slide-container" id="slide1">
+    <div class="title-layout">
+        <div class="tag-label">Reviewer Presentation</div>
+        <h1>Module 1: <br><span>Ang Sining at Agham ng Pagbasa</span></h1>
+        <p class="subtitle">Epektibong Gabay para sa Senior High at Kolehiyo</p>
+    </div>
+</div>
+
+<!-- SLIDE 2: Kahulugan at Kahalagahan -->
+<div class="slide-container" id="slide2">
+    <h2 class="slide-title">Kahulugan at Kahalagahan</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="glass-card">
+                <h3>Ano ang Pagbasa?</h3>
+                <p>Isang proseso ng pagtanggap, pag-analisa, at pag-unawa sa mga nakasulat na simbolo o teksto upang makakuha ng impormasyon.</p>
+                <p style="margin-top: 20px; color: var(--accent-color); font-weight: 600;">80% ng impormasyong ating nakukuha sa araw-araw ay mula sa pagbabasa.</p>
+            </div>
+            <div class="glass-card" style="display: flex; flex-direction: column; justify-content: center; border-left: 4px solid var(--accent-color);">
+                <span class="tag-label">Key Idea</span>
+                <p style="font-size: 28px; font-weight: 600; line-height: 1.3;">"Ang pagbasa ang susi sa kaalaman at epektibong pakikipag-ugnayan."</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 3: Apat na Makrong Kasanayan -->
+<div class="slide-container" id="slide3">
+    <h2 class="slide-title">Makrong Kasanayan</h2>
+    <div class="content-area">
+        <div class="tiled-content" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="tile"><div class="icon"><i class="fa-solid fa-book-open"></i></div><h3>Pagbasa</h3></div>
+            <div class="tile"><div class="icon"><i class="fa-solid fa-pen-nib"></i></div><h3>Pagsusulat</h3></div>
+            <div class="tile"><div class="icon"><i class="fa-solid fa-comment-dots"></i></div><h3>Pagsasalita</h3></div>
+            <div class="tile"><div class="icon"><i class="fa-solid fa-ear-listen"></i></div><h3>Pakikinig</h3></div>
+        </div>
+        <div class="glass-card" style="margin-top: 40px; text-align: center; padding: 20px;">
+            <p>Ang mga kasanayang ito ay <strong>magkakaugnay</strong> at <strong>sabay-sabay</strong> na nahuhubog sa isang mag-aaral.</p>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 4: Uri ng Pagbasa (Betts) -->
+<div class="slide-container" id="slide4">
+    <h2 class="slide-title">Uri ng Pagbasa (Ayon kay Betts)</h2>
+    <div class="content-area">
+        <div class="glass-card" style="padding: 0;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Uri</th>
+                        <th>Katangian</th>
+                        <th>Layunin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="font-weight: 700;">Pahapyaw</td>
+                        <td>Mabilisang pagtingin sa teksto.</td>
+                        <td>Makuha ang pangunahing ideya o paksa.</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 700;">Mabilis</td>
+                        <td>Bilis na may kasamang pag-unawa.</td>
+                        <td>Pagkuha ng mahahalagang detalye sa maikling oras.</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 700;">Paaral</td>
+                        <td>Masusi, kritikal, at detalyado.</td>
+                        <td>Malalim na pagsusuri at pagmemorya ng datos.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 5: Apat na Uri (Dawson & Bamman) -->
+<div class="slide-container" id="slide5">
+    <h2 class="slide-title">Iba pang Uri ng Pagbasa</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="glass-card">
+                <ul class="styled-list">
+                    <li><strong>Malakas at Tahimik</strong> - Pagbigkas at pag-unawa sa isip.</li>
+                    <li><strong>Mapanuring Pagbasa</strong> - Kritikal na pagtimbang sa ideya.</li>
+                    <li><strong>Panlibang</strong> - Para sa kasiyahan at pampalipas-oras.</li>
+                    <li><strong>Paaral</strong> - Nakatuon sa akademikong pangangailangan.</li>
+                </ul>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center;">
+                 <i class="fa-solid fa-graduation-cap" style="font-size: 200px; opacity: 0.2;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 6: Mga Teorya ng Pagbasa -->
+<div class="slide-container" id="slide6">
+    <h2 class="slide-title">Mga Teorya ng Pagbasa</h2>
+    <div class="content-area">
+        <div class="tiled-content" style="grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;">
+            <div class="tile" style="text-align: left;">
+                <span class="tag-label">Bottom-Up</span>
+                <p>Mula sa teksto patungo sa mambabasa (Outside-In).</p>
+            </div>
+            <div class="tile" style="text-align: left;">
+                <span class="tag-label">Top-Down</span>
+                <p>Mula sa mambabasa patungo sa teksto (Inside-Out).</p>
+            </div>
+            <div class="tile" style="text-align: left;">
+                <span class="tag-label" style="background: #a5b4fc;">Interaktib</span>
+                <p>Ang ugnayan at interaksyon ng mambabasa at teksto.</p>
+            </div>
+            <div class="tile" style="text-align: left;">
+                <span class="tag-label" style="background: #f0abfc;">Iskema</span>
+                <p>Paggamit ng dating kaalaman (Background Knowledge).</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 7: Paglinang ng Iskema -->
+<div class="slide-container" id="slide7">
+    <h2 class="slide-title">Paglinang ng Iskema</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div style="display: flex; align-items: center; justify-content: center;">
+                 <i class="fa-solid fa-brain" style="font-size: 180px; color: var(--accent-color); filter: drop-shadow(0 0 20px rgba(222, 255, 154, 0.4));"></i>
+            </div>
+            <div class="glass-card">
+                <p style="margin-bottom: 25px;">Ang ating iskema o dating kaalaman ay:</p>
+                <ul class="styled-list">
+                    <li>Nararagdagan sa bawat pagbabasa</li>
+                    <li>Nalilinang sa pamamagitan ng karanasan</li>
+                    <li>Nababago base sa bagong impormasyon</li>
+                    <li>Napauunlad para sa mas malalim na unawa</li>
+                </ul>
+                <div style="margin-top: 30px; padding: 15px; background: rgba(222, 255, 154, 0.1); border-radius: 10px;">
+                    <p style="font-size: 16px; font-style: italic;">"Walang mambabasa na nagsisimula sa zero knowledge."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 8: Module 1 Summary -->
+<div class="slide-container" id="slide8">
+    <h2 class="slide-title">Module 1 Summary</h2>
+    <div class="content-area">
+        <div class="glass-card" style="border-top: 5px solid var(--accent-color);">
+            <ul class="styled-list" style="font-size: 24px;">
+                <li>Ang pagbasa ay <strong>agham</strong> dahil sa proseso at <strong>sining</strong> dahil sa estilo.</li>
+                <li>Mahalaga ang pagbasa sa pagkuha ng <strong>80% ng impormasyon</strong>.</li>
+                <li>May iba't ibang uri (Betts, Dawson) base sa <strong>layunin</strong> ng mambabasa.</li>
+                <li>Ang <strong>Iskema</strong> ang pundasyon ng epektibong pag-unawa sa anumang teksto.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 9: Module 2 Title -->
+<div class="slide-container" id="slide9">
+    <div class="title-layout">
+        <div class="tag-label">Reviewer Presentation</div>
+        <h1>Module 2: <br><span>Iba’t Ibang Uri ng Teksto</span></h1>
+        <p class="subtitle">Pagsusuri sa Kayarian at Layunin ng mga Babasahin</p>
+    </div>
+</div>
+
+<!-- SLIDE 10: Ano ang Teksto? -->
+<div class="slide-container" id="slide10">
+    <h2 class="slide-title">Ano ang Teksto?</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="glass-card">
+                <h3>Kahulugan</h3>
+                <p>Isang babasahin na nagtataglay ng mga impormasyon, ideya, o mensahe na nais ipahatid ng may-akda sa mambabasa.</p>
+                <p style="margin-top: 20px;">Maaari itong maging pormal (libro, balita) o di-pormal (post sa social media, liham).</p>
+            </div>
+            <div class="glass-card" style="background: rgba(165, 180, 252, 0.15);">
+                <span class="tag-label">Exam Takeaway</span>
+                <p style="font-size: 32px; font-weight: 700; color: var(--accent-color);">"Lahat ng babasahin ay anyo ng teksto."</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 11: Tekstong Impormatibo -->
+<div class="slide-container" id="slide11">
+    <h2 class="slide-title">Tekstong Impormatibo</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="glass-card">
+                <p>Naglalayong magbigay ng <strong>tumpak at obhetibong</strong> impormasyon nang walang kinikilingan.</p>
+                <h4 style="margin: 20px 0 10px; color: var(--accent-color);">Gamit ang 5W1H:</h4>
+                <p style="font-size: 18px; letter-spacing: 2px;">WHO • WHAT • WHEN • WHERE • WHY • HOW</p>
+            </div>
+            <div class="glass-card">
+                <h3>Mga Halimbawa:</h3>
+                <ul class="styled-list">
+                    <li>Balita sa Pahayagan</li>
+                    <li>Encyclopedia o Diksyunaryo</li>
+                    <li>Textbook o Sulating Siyentipiko</li>
+                    <li>Ulat ng Pananaliksik</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 12: Tekstong Deskriptibo -->
+<div class="slide-container" id="slide12">
+    <h2 class="slide-title">Tekstong Deskriptibo</h2>
+    <div class="content-area">
+        <p style="text-align: center; margin-bottom: 30px;">Naglalayong maglarawan ng isang tao, bagay, lugar, o pangyayari.</p>
+        <div class="two-column">
+            <div class="tile" style="text-align: left;">
+                <div class="icon" style="text-align: left;"><i class="fa-solid fa-microscope"></i></div>
+                <h3>Teknikal</h3>
+                <p>Paglalarawang obhetibo at nakabase sa katotohanan. (Hal. Sukat ng gusali, kulay ng mata)</p>
+            </div>
+            <div class="tile" style="text-align: left;">
+                <div class="icon" style="text-align: left;"><i class="fa-solid fa-palette"></i></div>
+                <h3>Impresyonistiko</h3>
+                <p>Paglalarawang subhetibo at naglalaman ng damdamin o opinyon. (Hal. Kagandahan ng tanawin)</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 13: Tekstong Persuweysib -->
+<div class="slide-container" id="slide13">
+    <h2 class="slide-title">Tekstong Persuweysib</h2>
+    <div class="content-area">
+        <div class="glass-card" style="margin-bottom: 30px; text-align: center;">
+            <p>Naglalayong <strong>manghikayat o mangumbinsi</strong> ng mambabasa na pumanig sa opinyon ng manunulat.</p>
+        </div>
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon">E</div>
+                <h3>Ethos</h3>
+                <p>Kredibilidad o karakter ng manunulat.</p>
+            </div>
+            <div class="tile">
+                <div class="icon">P</div>
+                <h3>Pathos</h3>
+                <p>Paggamit ng emosyon upang manghikayat.</p>
+            </div>
+            <div class="tile">
+                <div class="icon">L</div>
+                <h3>Logos</h3>
+                <p>Paggamit ng lohika, rason, at ebidensya.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 14: Tekstong Naratibo -->
+<div class="slide-container" id="slide14">
+    <h2 class="slide-title">Tekstong Naratibo</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="glass-card">
+                <p>Naglalayong magkuwento ng magkakaugnay na pangyayari.</p>
+                <h3 style="margin-top: 25px; color: var(--accent-color);">Mga Halimbawa:</h3>
+                <p>Maikling kuwento, Nobela, Alamat, Mito, Talambuhay.</p>
+            </div>
+            <div class="glass-card">
+                <h3>Mga Elemento:</h3>
+                <ul class="styled-list">
+                    <li><strong>Tauhan</strong> (Protagonista/Antagonista)</li>
+                    <li><strong>Tagpuan</strong> (Lugar at Panahon)</li>
+                    <li><strong>Banghay</strong> (Daloy ng pangyayari)</li>
+                    <li><strong>Tunggalian</strong> (Tao vs Tao, Sarili, Kalikasan)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 15: Tekstong Argumentatibo -->
+<div class="slide-container" id="slide15">
+    <h2 class="slide-title">Tekstong Argumentatibo</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div style="display: flex; align-items: center; justify-content: center;">
+                 <i class="fa-solid fa-scale-balanced" style="font-size: 200px; opacity: 0.15; color: white;"></i>
+            </div>
+            <div class="glass-card">
+                <span class="tag-label" style="background: #f87171;">Laban ng Katwiran</span>
+                <p>Naglalayong ipagtanggol ang isang posisyon sa pamamagitan ng <strong>lohikal na pangangatwiran</strong>.</p>
+                <h4 style="margin-top: 20px; color: var(--accent-color);">Katangian:</h4>
+                <ul class="styled-list" style="font-size: 18px;">
+                    <li>May malinaw na tesis o paninindigan.</li>
+                    <li>May matibay na ebidensya at datos.</li>
+                    <li>Inaatake ang counter-argument.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 16: Tekstong Prosidyural -->
+<div class="slide-container bleed-image-layout" id="slide16">
+    <div class="bleed-text">
+        <h2 class="slide-title">Tekstong Prosidyural</h2>
+        <div class="glass-card">
+            <p>Nagbibigay ng <strong>panuto o direksyon</strong> kung paano gawin ang isang bagay sa maayos na hakbang.</p>
+            <h4 style="margin-top: 20px; color: var(--accent-color);">Halimbawa:</h4>
+            <ul class="styled-list" style="font-size: 18px;">
+                <li>Resipi ng pagluluto</li>
+                <li>Manual ng gamit (IKEA style)</li>
+                <li>Eksperimento sa Siyensya</li>
+                <li>Direksyon sa Waze/Google Maps</li>
+            </ul>
+        </div>
+    </div>
+    <div class="image-container">
+        <!-- Replaced placeholder with high-quality abstract procedural/schematic image -->
+        <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1280&h=1440" alt="Process and Engineering Schematic" class="bleed-img" onerror="this.src='https://placehold.co/640x720/4f46e5/ffffff?text=STEP-BY-STEP+FLOW'">
+    </div>
+</div>
+
+<!-- SLIDE 17: Bakit Mahalaga? -->
+<div class="slide-container" id="slide17">
+    <h2 class="slide-title">Bakit Mahalaga ang Uri ng Teksto?</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-circle-check"></i></div>
+                <h3>Tamang Pag-unawa</h3>
+                <p>Nalalaman natin ang tunay na intensyon ng may-akda.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-lightbulb"></i></div>
+                <h3>Pagbuo ng Ideya</h3>
+                <p>Mas madaling ayusin ang sariling kaisipan base sa format.</p>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-paper-plane"></i></div>
+                <h3>Komunikasyon</h3>
+                <p>Nagiging epektibo ang pagbabahagi ng impormasyon.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 18: QUICK EXAM TAKEAWAY -->
+<div class="slide-container" id="slide18">
+    <h2 class="slide-title">Quick Exam Takeaway</h2>
+    <div class="content-area">
+        <div class="glass-card" style="padding: 0; border: none;">
+            <table style="background: transparent;">
+                <thead>
+                    <tr>
+                        <th style="font-size: 20px;">Uri ng Teksto</th>
+                        <th style="font-size: 20px;">Keyword / Layunin</th>
+                    </tr>
+                </thead>
+                <tbody style="font-size: 22px;">
+                    <tr><td><strong>Impormatibo</strong></td><td style="color: var(--accent-color);">Nagbibigay-kaalaman (Fact-based)</td></tr>
+                    <tr><td><strong>Deskriptibo</strong></td><td style="color: var(--accent-color);">Naglalarawan (Vivid imagery)</td></tr>
+                    <tr><td><strong>Persuweysib</strong></td><td style="color: var(--accent-color);">Nanghihikayat (Convincing)</td></tr>
+                    <tr><td><strong>Naratibo</strong></td><td style="color: var(--accent-color);">Nagkukuwento (Storytelling)</td></tr>
+                    <tr><td><strong>Argumentatibo</strong></td><td style="color: var(--accent-color);">Nakikipagtalo (Reasoning)</td></tr>
+                    <tr><td><strong>Prosidyural</strong></td><td style="color: var(--accent-color);">Nagtuturo (Instructions)</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="margin-top: 30px; text-align: center;">
+            <p style="font-size: 24px; font-weight: 700;">Good luck sa inyong exam at recitation! ✨</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
